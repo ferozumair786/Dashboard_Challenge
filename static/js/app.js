@@ -36,13 +36,52 @@ async function buildCharts(sample) {
     let sampleData = await d3.json(sampleURL);
     console.log(sampleData)
     // @TODO: Build a Bubble Chart using the sample data
+    const bubbleTrace = {
+        type: "scatter",
+        mode: "markers",
+        name: "Bubble Chart",
+        text: sampleData.otu_labels,
+        x: sampleData.otu_ids,
+        y: sampleData.sample_values,
+        marker: {
+          size: sampleData.sample_values,
+          // sizemode: "area",
+          sizeref: 1.8,
+          color: sampleData.otu_ids
+        }
+    };
 
+    const dataBubble = [bubbleTrace];
+
+    const bubbleLayout = {
+      title: "Belly Button Biodiversity",
+      showlegend: false
+    }
+    const BUBBLE = document.getElementById("bubble");
+    Plotly.newPlot(BUBBLE, dataBubble, bubbleLayout);
     // @TODO: Build a Pie Chart
     // HINT: You will need to use slice() to grab the top 10 sample_values,
-    // top10 = sampleData.slice(0,10)
+    // top10 = sampleData.forEach(data => {data.slice(0,10)})
     // console.log(`Top 10: ${top10}`)
     // otu_ids, and labels (10 each).
+    const PIE = document.getElementById("pie");
+    
+    const pieTrace = {
+      type: "pie",
+      name: "Pie Chart",
+      hoverinfo: sampleData.otu_labels.slice(0,10),
+      values: sampleData.sample_values.slice(0,10),
+      labels: sampleData.otu_ids.slice(0,10)
     }
+
+    const pieData = [pieTrace]
+
+    const pieLayout = {
+      type: 'pie'
+    }
+  
+    Plotly.newPlot(PIE, pieData, pieLayout)
+  }
 };
 buildCharts();
 
