@@ -74,7 +74,8 @@ async function buildCharts(sample) {
     const pieTrace = {
       type: "pie",
       name: "Pie Chart",
-      hoverinfo: sampleData.otu_labels.slice(0,10),
+      hovertext: sampleData.otu_labels.slice(0,10),
+      hoverinfo: 'hovertext'
       values: sampleData.sample_values.slice(0,10),
       labels: sampleData.otu_ids.slice(0,10)
     }
