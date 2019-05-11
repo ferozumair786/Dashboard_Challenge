@@ -55,7 +55,13 @@ async function buildCharts(sample) {
 
     const bubbleLayout = {
       title: "Belly Button Biodiversity",
-      showlegend: false
+      showlegend: false,
+      xaxis: {
+        title: "Microorganism Operational Taxonomic Unit ID (OTU ID)"
+      },
+      yaxis: {
+        title: "Number of Reads of Microorganism"
+      }
     }
     const BUBBLE = document.getElementById("bubble");
     Plotly.newPlot(BUBBLE, dataBubble, bubbleLayout);

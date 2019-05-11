@@ -45,7 +45,6 @@ async function buildCharts(sample) {
         y: sampleData.sample_values,
         marker: {
           size: sampleData.sample_values,
-          // sizemode: "area",
           sizeref: 1.8,
           color: sampleData.otu_ids
         }
@@ -55,7 +54,13 @@ async function buildCharts(sample) {
 
     const bubbleLayout = {
       title: "Belly Button Biodiversity",
-      showlegend: false
+      showlegend: false,
+      xaxis: {
+        title: "Microorganism Operational Taxonomic Unit ID (OTU ID)"
+      },
+      yaxis: {
+        title: "Number of Reads of Microorganism"
+      }
     }
     const BUBBLE = document.getElementById("bubble");
     Plotly.newPlot(BUBBLE, dataBubble, bubbleLayout);
@@ -77,7 +82,7 @@ async function buildCharts(sample) {
     const pieData = [pieTrace]
 
     const pieLayout = {
-      type: 'pie'
+      title: "Top 10 Microbes Found in Bellybutton"
     }
   
     Plotly.newPlot(PIE, pieData, pieLayout)
